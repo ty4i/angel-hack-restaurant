@@ -4,11 +4,15 @@ require 'sinatra'
 require 'line/bot'
 <<<<<<< HEAD:app.rb
 require 'pg'
+<<<<<<< HEAD:main.rb
 require './src/get_db_connection'
 =======
 require './src/sign_up_chef'
 require './src/buttons'
 >>>>>>> taishi:main.rb
+=======
+require './src/db_operate'
+>>>>>>> f059b1b3c4507616766db414c414e5721c746f99:app.rb
 
 def client
   @client ||= Line::Bot::Client.new { |config|
@@ -37,18 +41,7 @@ post '/callback' do
         # テスト(DB)
         connection = get_db_connection()
         connection.internal_encoding = "UTF-8"
-        begin
-          # connection を使い PostgreSQL を操作する
-          result = connection.exec("INSERT INTO sample (username, emial) VALUES($1, $2)", [key1, key2])
-        ensure
-          # データベースへのコネクションを切断する
-          connection.finish
-        end
-        message = {
-          type: 'text',
-          text: (p event) #event.message['text']
-        }
-        client.reply_message(event['replyToken'], message)
+        test(event.message['text'])
       when Line::Bot::Event::MessageType::Image, Line::Bot::Event::MessageType::Video
         response = client.get_message_content(event.message['id'])
         tf = Tempfile.open("content")
