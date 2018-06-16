@@ -1,0 +1,28 @@
+curl -X POST \
+-H 'Content-Type:application/json' \
+-H 'Authorization: Bearer c/3I5Gd49D9v9sO923pB1Ld6ruoRMpsQgpKj17ddFyiOYnDCg1VHO7TBs2uxB9jIyR7XZQxy1BRhhDuy9LxAMUckCwdPa0ILUFFz575FRSqOk/XRI8pWNQtN/xYxyQbegGtjZHPNpdqCOPm6wVABGgdB04t89/1O/w1cDnyilFU=' \
+-d '{
+   "to": "U7f9bf11c40a03a33d1743ee788a3db85",
+   "messages":[
+      {
+        "type": "template",
+        "altText": "ユーザー情報の登録を開始します",
+        "template": {
+            "type": "confirm",
+            "text": "飲食店の登録ですか？それとも個人の登録ですか？",
+            "actions": [
+                {
+                  "type": "message",
+                  "label": "飲食店",
+                  "text": "飲食店"
+                },
+                {
+                  "type": "message",
+                  "label": "個人",
+                  "text": "個人"
+                }
+            ]
+        }
+      }
+   ]
+}' https://api.line.me/v2/bot/message/push

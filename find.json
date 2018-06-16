@@ -1,0 +1,57 @@
+curl -X POST \
+-H 'Content-Type:application/json' \
+-H 'Authorization: Bearer c/3I5Gd49D9v9sO923pB1Ld6ruoRMpsQgpKj17ddFyiOYnDCg1VHO7TBs2uxB9jIyR7XZQxy1BRhhDuy9LxAMUckCwdPa0ILUFFz575FRSqOk/XRI8pWNQtN/xYxyQbegGtjZHPNpdqCOPm6wVABGgdB04t89/1O/w1cDnyilFU=' \
+-d '{
+   "to": "U7f9bf11c40a03a33d1743ee788a3db85",
+   "messages":[
+      {
+        "type": "template",
+        "altText": "検索結果を表示します",
+        "template": {
+            "type": "image_carousel",
+            "columns": [
+                {
+                  "imageUrl": "https://vignette.wikia.nocookie.net/computervision/images/3/34/Lenna.jpg",
+                  "action": {
+                    "type": "postback",
+                    "label": "Buy",
+                    "data": "action=buy&itemid=111"
+                  }
+                },
+                {
+                  "imageUrl": "https://vignette.wikia.nocookie.net/computervision/images/3/34/Lenna.jpg",
+                  "action": {
+                    "type": "postback",
+                    "label": "Buy",
+                    "data": "action=buy&itemid=111"
+                  }
+                },
+                {
+                  "imageUrl": "https://vignette.wikia.nocookie.net/computervision/images/3/34/Lenna.jpg",
+                  "action": {
+                    "type": "postback",
+                    "label": "Buy",
+                    "data": "action=buy&itemid=111"
+                  }
+                },
+                {
+                  "imageUrl": "https://vignette.wikia.nocookie.net/computervision/images/3/34/Lenna.jpg",
+                  "action": {
+                    "type": "message",
+                    "label": "Yes",
+                    "text": "yes"
+                  }
+                },
+                {
+                  "imageUrl": "https://vignette.wikia.nocookie.net/computervision/images/3/34/Lenna.jpg",
+                  "action": {
+                    "type": "uri",
+                    "label": "View detail",
+                    "uri": "https://twitter.com/5tio"
+                  }
+                }
+            ]
+        }
+      }
+   ]
+}' https://api.line.me/v2/bot/message/push
