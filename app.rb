@@ -2,8 +2,6 @@
 require 'dotenv'
 require 'sinatra'
 require 'line/bot'
-require 'pg'
-require './src/get_db_connection'
 
 def client
   @client ||= Line::Bot::Client.new { |config|
@@ -27,16 +25,6 @@ post '/callback' do
     when Line::Bot::Event::Message
       case event.type
       when Line::Bot::Event::MessageType::Text
-        # テスト(DB)
-        connection = get_db_connection()
-        connection.internal_encoding = "UTF-8"
-        begin
-          # connection を使い PostgreSQL を操作する
-          result = connection.exec("INSERT INTO sample (username, emial) VALUES($1, $2)", [key1, key2])
-        ensure
-          # データベースへのコネクションを切断する
-          connection.finish
-        end
         message = {
           type: 'text',
           text: (p event) #event.message['text']
