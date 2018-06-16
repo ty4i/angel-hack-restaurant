@@ -17,3 +17,6 @@ def test(tes)
     connection.finish
   end
 end
+
+# シェフの情報を登録
+def register()
