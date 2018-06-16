@@ -31,7 +31,7 @@ post '/callback' do
       when Line::Bot::Event::MessageType::Text
         case event.message['text']
         when 'シェフ登録'
-          client.reply_message(event['replyToken'], sign_up_chef)
+          client.reply_message(event['replyToken'], sign_up_chef(event.message['text']))
         when '店舗登録'
           client.reply_message(event['replyToken'], sign_up_restaurant)
         when '検索'
@@ -53,6 +53,24 @@ post '/callback' do
         response = client.get_message_content(event.message['id'])
         tf = Tempfile.open("content")
         tf.write(response.body)
+      end
+    when Line::Bot::Event::Postback
+      #data =  URI::decode_www_form(event['postback']['data']).to_h
+      #p data
+      p event['postback']
+      case data['chef_sign_up_flag']
+      when 'yes'
+        message = {
+          type: 'text',
+          text: event.message['text'] #(p event)
+        }
+        client.reply_message(event['replyToken'], message)
+      else
+        message = {
+          type: 'text',
+          text: '情報の登録を取り消しました'
+        }
+        client.reply_message(event['replyToken'], message)
       end
     end
   }
