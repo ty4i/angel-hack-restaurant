@@ -25,11 +25,35 @@ post '/callback' do
     when Line::Bot::Event::Message
       case event.type
       when Line::Bot::Event::MessageType::Text
-        message = {
-          type: 'text',
-          text: (p event) #event.message['text']
-        }
-        client.reply_message(event['replyToken'], message)
+        case event.message['text']
+        when 'シェフの情報を登録します'
+          client.reply_message(event['replyToken'], sign_up_chef)
+        end
+        case event.message['text']
+        when 'お店の情報を登録します'
+          client.reply_message(event['replyToken'], sign_up_restaurant)
+        end
+        case event.message['text']
+        when '登録されているシェフを探します'
+          client.reply_message(event['replyToken'], find_chef)
+        end
+        case event.message['text']
+        when '登録されているレストランを探します'
+          client.reply_message(event['replyToken'], restaurant_list)
+        end
+        case event.message['text']
+        when 'マッチング'
+          client.reply_message(event['replyToken'], is_matching?)
+        end
+
+
+        # message = {
+        #   type: 'text',
+        #   text:event.message['text'] #(p event) 
+        # }
+        # client.reply_message(event['replyToken'], message)
+
+
       when Line::Bot::Event::MessageType::Image, Line::Bot::Event::MessageType::Video
         response = client.get_message_content(event.message['id'])
         tf = Tempfile.open("content")
