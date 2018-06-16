@@ -2,17 +2,11 @@
 require 'dotenv'
 require 'sinatra'
 require 'line/bot'
-<<<<<<< HEAD:app.rb
 require 'pg'
-<<<<<<< HEAD:main.rb
 require './src/get_db_connection'
-=======
 require './src/sign_up_chef'
 require './src/buttons'
->>>>>>> taishi:main.rb
-=======
 require './src/db_operate'
->>>>>>> f059b1b3c4507616766db414c414e5721c746f99:app.rb
 
 def client
   @client ||= Line::Bot::Client.new { |config|
@@ -29,8 +23,6 @@ post '/callback' do
   unless client.validate_signature(body, signature)
     error 400 do 'Bad Request' end
   end
-
-  buttons
 
   events = client.parse_events_from(body)
   events.each { |event|
