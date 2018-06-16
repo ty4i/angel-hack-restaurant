@@ -1,10 +1,10 @@
-def sign_up_chef
+def sign_up_restaurant
 {
   "type": "template",
-  "altText": "シェフ情報登録",
+  "altText": "店舗情報登録",
   "template": {
       "type": "confirm",
-      "text": "シェフ情報の登録を開始します",
+      "text": "店舗情報の登録を開始します",
       "actions": [
           {
             "type": "message",

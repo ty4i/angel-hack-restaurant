@@ -2,6 +2,10 @@
 require 'dotenv'
 require 'sinatra'
 require 'line/bot'
+require './src/sign_up_chef'
+require './src/sign_up_restaurant'
+require './src/find_chef'
+require './src/restaurant_list'
 
 def client
   @client ||= Line::Bot::Client.new { |config|
@@ -26,33 +30,24 @@ post '/callback' do
       case event.type
       when Line::Bot::Event::MessageType::Text
         case event.message['text']
-        when 'シェフの情報を登録します'
+        when 'シェフ登録'
           client.reply_message(event['replyToken'], sign_up_chef)
-        end
-        case event.message['text']
-        when 'お店の情報を登録します'
+        when '店舗登録'
           client.reply_message(event['replyToken'], sign_up_restaurant)
-        end
-        case event.message['text']
-        when '登録されているシェフを探します'
+        when '検索'
           client.reply_message(event['replyToken'], find_chef)
-        end
-        case event.message['text']
-        when '登録されているレストランを探します'
+        when '店舗一覧'
           client.reply_message(event['replyToken'], restaurant_list)
+        else
+          message = {
+            type: 'text',
+            text: event.message['text'] #(p event)
+          }
+          client.reply_message(event['replyToken'], message)
         end
-        case event.message['text']
-        when 'マッチング'
-          client.reply_message(event['replyToken'], is_matching?)
-        end
-
-
-        # message = {
-        #   type: 'text',
-        #   text:event.message['text'] #(p event) 
-        # }
-        # client.reply_message(event['replyToken'], message)
-
+        #        case event.message['text']
+        #        when 'マッチング'
+        #          client.reply_message(event['replyToken'], is_matching?)
 
       when Line::Bot::Event::MessageType::Image, Line::Bot::Event::MessageType::Video
         response = client.get_message_content(event.message['id'])
