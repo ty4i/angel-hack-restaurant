@@ -4,6 +4,7 @@ GEM
     dotenv (2.4.0)
     line-bot-api (1.2.2)
     mustermann (1.0.2)
+    pg (1.0.0)
     rack (2.0.4)
     rack-protection (2.0.3)
       rack
@@ -20,6 +21,7 @@ PLATFORMS
 DEPENDENCIES
   dotenv
   line-bot-api
+  pg
   sinatra
 
 BUNDLED WITH
