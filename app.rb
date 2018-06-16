@@ -2,6 +2,8 @@
 require 'dotenv'
 require 'sinatra'
 require 'line/bot'
+require 'pg'
+require './src/db_operate'
 
 def client
   @client ||= Line::Bot::Client.new { |config|
@@ -25,11 +27,10 @@ post '/callback' do
     when Line::Bot::Event::Message
       case event.type
       when Line::Bot::Event::MessageType::Text
-        message = {
-          type: 'text',
-          text: (p event) #event.message['text']
-        }
-        client.reply_message(event['replyToken'], message)
+        # テスト(DB)
+        connection = get_db_connection()
+        connection.internal_encoding = "UTF-8"
+        test(event.message['text'])
       when Line::Bot::Event::MessageType::Image, Line::Bot::Event::MessageType::Video
         response = client.get_message_content(event.message['id'])
         tf = Tempfile.open("content")
