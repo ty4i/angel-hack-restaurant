@@ -31,12 +31,6 @@ post '/callback' do
         connection = get_db_connection()
         connection.internal_encoding = "UTF-8"
         test(event.message['text'])
-        
-        message = {
-          type: 'text',
-          text: (p event) #event.message['text']
-        }
-        client.reply_message(event['replyToken'], message)
       when Line::Bot::Event::MessageType::Image, Line::Bot::Event::MessageType::Video
         response = client.get_message_content(event.message['id'])
         tf = Tempfile.open("content")
