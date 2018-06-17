@@ -35,7 +35,7 @@ post '/callback' do
         when '店舗登録'
           client.reply_message(event['replyToken'], sign_up_restaurant)
         when '検索'
-          client.reply_message(event['replyToken'], restaurant_list)
+          client.reply_message(event['replyToken'], find_chef)
         when '店舗一覧'
           client.reply_message(event['replyToken'], restaurant_list)
         else
