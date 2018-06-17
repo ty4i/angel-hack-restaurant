@@ -65,9 +65,9 @@ post '/callback' do
       when 'yes_test'
         message = {
           type: 'text',
-          text: '名前を教えてください' #(p event)
+          text: '名前，アピールポイント，興味のあるカテゴリ，時間帯を改行して入力してください' #(p event)
         }
-        client.reply_message(event['replyToken'], message)
+        client.reply_message(event['replyToken'], chef_description)
       else
         message = {
           type: 'text',

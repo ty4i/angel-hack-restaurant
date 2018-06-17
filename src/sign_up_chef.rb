@@ -29,10 +29,19 @@ def sign_up_chef(text)
   ]
 end
 
+def register_chef
+  [
+    {
+      type: 'text',
+      text: '登録を完了しました'
+    }
+  ]
+end
+
 def chef_description
     {
       type: 'text',
-      text: "シェフ情報の登録を行います"
+      text: "シェフ情報の登録を行います\n名前，アピールポイント，興味のあるカテゴリ，希望の時間帯を入力してください"
     }
 #    ,
    # {
