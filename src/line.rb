@@ -6,6 +6,7 @@ require './src/sign_up_chef'
 require './src/sign_up_restaurant'
 require './src/find_chef'
 require './src/restaurant_list'
+require './src/matching'
 
 def client
   @client ||= Line::Bot::Client.new { |config|
@@ -38,6 +39,8 @@ post '/callback' do
           client.reply_message(event['replyToken'], find_chef)
         when '店舗一覧'
           client.reply_message(event['replyToken'], restaurant_list)
+        when 'マッチング'
+          client.reply_message(event['replyToken'], matching)
         else
           message = {
             type: 'text',
