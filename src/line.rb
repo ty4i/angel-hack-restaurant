@@ -56,13 +56,16 @@ post '/callback' do
       end
     when Line::Bot::Event::Postback
       #data =  URI::decode_www_form(event['postback']['data']).to_h
-      #p data
-      p event['postback']
-      case data['chef_sign_up_flag']
-      when 'yes'
+      data = event['postback']['data']
+      p data
+      #p event['postback']
+      #case data['chef_sign_up_flag']
+      case data
+      #when 'yes'
+      when 'yes_test'
         message = {
           type: 'text',
-          text: event.message['text'] #(p event)
+          text: '名前を教えてください' #(p event)
         }
         client.reply_message(event['replyToken'], message)
       else
